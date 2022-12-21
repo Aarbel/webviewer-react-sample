@@ -36,9 +36,10 @@ Go to `localhost:3000` inside your Chrome browser (out of the Simulator of cours
 In both Safari (Simulator) and Chrome (Computer)
 
 - Refresh the page
+- Boom you will see an alert()
 
 Result:
 - On Chrome you will see a Width of `595` for page 1
-- On Ipad you will see a Width of `793` for page 1 (but it displays `595` the first time the document is rendered, then every time it's `793`)
+- On Ipad you will see a Width of `793` for page 1 (but it displays `595` the first time the document is rendered, then every time it's `793`).
 
-So the coordinates and width of a document is not consistent between devices, causing us by problems of location on documents thru pdftron.
+So the dimensions and width of a document is not consistent between devices, causing us big problems of location on documents thru pdftron.
