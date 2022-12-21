@@ -3,6 +3,9 @@
 - Page Width of a document is different on Ipad when using webviewerServerURL, compared to regular browsers (Chrome on laptop, etc...).
 - There is no problem (the dimensions are the same between Ipad Safari and Laptop Chrome) using only client webviewer without webviewerServerURL
 
+![image](https://user-images.githubusercontent.com/25119847/208996194-97743f14-e1a4-48bf-9076-52212878684c.png)
+![image](https://user-images.githubusercontent.com/25119847/208996136-9afd7c86-89a8-4f1b-9e2f-349c401dcce7.png)
+
 
 # Process to replicate the bug of pdftron dimensions on IPad
 
