@@ -1,63 +1,44 @@
-# WebViewer - React sample
+# Synthesis of the problem with PDFTRON / IPAD and webviewerServerURL
 
-[WebViewer](https://www.pdftron.com/documentation/web/) is a powerful JavaScript-based PDF Library that's part of the [PDFTron PDF SDK](https://www.pdftron.com). It provides a slick out-of-the-box responsive UI that interacts with the core library to view, annotate and manipulate PDFs that can be embedded into any web project.
+Page Width of a document is different on Ipad when using webviewerServerURL, compared to regular browsers (Chrome on laptop, etc...).
+There is no problem (the dimensions are the same between Ipad Safari and Laptop Chrome) using only client webviewer without webviewerServerURL
 
-![WebViewer UI](https://www.pdftron.com/downloads/pl/webviewer-ui.png)
 
-This repo is specifically designed for any users interested in integrating WebViewer into React project. You can watch [a video here](https://youtu.be/bVhWXuLSL0k) to help you get started.
+# Process to replicate the bug of pdftron dimensions on IPad
 
-## Demo
+Screenshots of the problem can be found here: https://www.notion.so/clovisteam/Clovis-PDFTRON-bug-af9be9cb33c24ee0a0d9218324dfda99
 
-You can explore all of the functionality in our [showcase](https://www.pdftron.com/webviewer/demo/).
+## Preliminary installations
 
-## Initial setup
+- Use an Apple device (Macbook Pro, Imac, etc...)
+- Install XCode (last version): https://apps.apple.com/fr/app/xcode/id497799835?mt=12
+- Install Docker (last version): https://docs.docker.com/get-docker/
+## Process
+### 1: Start the React App
+> run `npm install && npm run docker-start && npm run start`
+(to stop the pdftron docker container just run `npm run docker-stop`)
 
-Before you begin, make sure your development environment includes [Node.js](https://nodejs.org/en/).
+It will:
+- build the pdftron webviewer server docker container
+- run the react app on `localhost:3000`
 
-## Install
+### 2: Start the Ipad Simulator and run the app inside
+> run `open -a simulator`
 
-```
-git clone https://github.com/PDFTron/webviewer-react-sample.git
-cd webviewer-react-sample
-npm install
-```
+It wil open the simulator app of XCode, then go to `File > Open Simulator > [Choose a recet Ipad Pro]`
+After the Ipad Simulator is up, open inner Safari app and go to `localhost:3000`
 
-## Run
+### 3: Run the app inside Chrome on your machine
+Go to `localhost:3000` inside your Chrome browser (out of the Simulator of course)
 
-```
-npm start
-```
+### 4: Perform PDFTRON tests
 
-After the app starts, you will be able to see WebViewer running on `localhost:3000`.
+In both Safari (Simulator) and Chrome (Computer)
 
-## Build
+- Refresh the page
 
-Run `npm run build` to build the project. The build artifacts will be stored in the `build/` directory. See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Result:
+- On Chrome you will see a Width of `595` for page 1
+- On Ipad you will see a Width of `793` for page 1 (but it displays `595` the first time the document is rendered, then every time it's `793`)
 
-To test the build directory locally you can use [serve](https://www.npmjs.com/package/serve) or [http-server](https://www.npmjs.com/package/http-server). In case of serve, by default it strips the .html extension stripped from paths. We added serve.json configuration to disable cleanUrls option.
-
-## GitHub Pages
-You can deploy your app to [GitHub Pages](https://pdftron.github.io/webviewer-react-sample/). To do so, make sure to update paths accordingly, for example, to deploy on `pdftron.github.io/webviewer-react-sample`, modify the `path`:
-
-```
-WebViewer(
- {
-   path: '/webviewer-react-sample/webviewer/lib',
-   initialDoc: '/webviewer-react-sample/files/PDFTRON_about.pdf',
- },
- viewer.current,
-).then((instance) => {
-```
-
-## WebViewer APIs
-
-See [API documentation](https://www.pdftron.com/documentation/web/guides/ui/apis).
-
-## Contributing
-
-See [contributing](./CONTRIBUTING.md).
-
-## License
-
-See [license](./LICENSE).
-![](https://onepixel.pdftron.com/webviewer-react-sample)
+So the coordinates and width of a document is not consistent between devices, causing us by problems of location on documents thru pdftron.

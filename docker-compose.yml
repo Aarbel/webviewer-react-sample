@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  pdftron:
+    image: pdftron/webviewer-server:latest
+    ulimits:
+      nofile:
+        soft: 64000
+        hard: 64000
+    environment:
+      TRN_PDFNET_KEY: "${PDFTRON_LICENSE_KEY}"
+      INCLUDE_DEMO: 'true'
+      TRN_DEBUG_MODE: 'true'
+    ports:
+      - 8090:8090
